@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1733908230 source:c:\users\yasmin mohamed\desktop\swift logistics\main.cpp
+	<iostream>
+	<fstream>
+	<vector>
+	<string>
+	<exception>
+
