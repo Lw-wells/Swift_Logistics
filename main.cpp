@@ -3,6 +3,8 @@
 #include <vector>
 #include <string>
 #include <exception>
+#include <limits> // Add this line
+
 using namespace std;
 
 // === Vehicle Base Class ===
@@ -123,7 +125,7 @@ public:
 };
 
 // === Backend Functions ===
-void saveVehiclesToFile(const vector<Vehicle *> &vehicles) {
+/*void saveVehiclesToFile(const vector<Vehicle *> &vehicles) {
     string filename;
     cout << "Enter the file path to save vehicles (e.g., vehicles.txt): ";
     cin.ignore();
@@ -141,12 +143,44 @@ void saveVehiclesToFile(const vector<Vehicle *> &vehicles) {
 
     cout << "Vehicles saved successfully to " << filename << "!" << endl;
     file.close();
+}*/
+
+void saveVehiclesToFile(const vector<Vehicle *> &vehicles) {
+    string filename;
+    cout << "Enter the file path to save vehicles (e.g., vehicles.txt): ";
+    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear the input buffer
+    getline(cin, filename);
+
+    ofstream file(filename);
+    if (!file) {
+        cerr << "Error: Unable to open file for saving vehicles!" << endl;
+        return;
+    }
+
+    for (const auto &vehicle : vehicles) {
+        vehicle->saveToFile(file);
+    }
+
+    cout << "Vehicles saved successfully to " << filename << "!" << endl;
+    file.close();
 }
+
+/*void loadVehiclesFromFile(vector<Vehicle *> &vehicles) {
+    string filename;
+    cout << "Enter the file path to load vehicles (e.g., vehicles.txt): ";
+    cin.ignore();
+    getline(cin, filename);
+
+    ifstream file(filename);
+    if (!file) {
+        cerr << "Error: Unable to open file for loading vehicles!" << endl;
+        return;
+    }*/
 
 void loadVehiclesFromFile(vector<Vehicle *> &vehicles) {
     string filename;
     cout << "Enter the file path to load vehicles (e.g., vehicles.txt): ";
-    cin.ignore();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear the input buffer
     getline(cin, filename);
 
     ifstream file(filename);
@@ -177,12 +211,26 @@ void loadVehiclesFromFile(vector<Vehicle *> &vehicles) {
     file.close();
 }
 
+
 // Add customer functions (existing logic preserved)
-void addCustomer(vector<Customer> &customers) {
+/*void addCustomer(vector<Customer> &customers) {
     string name, contact;
 
     cout << "\nEnter Customer Name: ";
     cin.ignore();
+    getline(cin, name);
+    cout << "Enter Contact: ";
+    getline(cin, contact);
+
+    customers.push_back(Customer(name, contact));
+    cout << "Customer added successfully!\n" << endl;
+}*/
+
+void addCustomer(vector<Customer> &customers) {
+    string name, contact;
+
+    cout << "\nEnter Customer Name: ";
+    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear the input buffer
     getline(cin, name);
     cout << "Enter Contact: ";
     getline(cin, contact);
@@ -204,7 +252,7 @@ void displayCustomers(const vector<Customer> &customers) {
     cout << endl;
 }
 
-void saveCustomers(const vector<Customer> &customers) {
+/*void saveCustomers(const vector<Customer> &customers) {
     string filename;
     cout << "Enter the file path to save customers (e.g., customers.txt): ";
     getline(cin, filename);
@@ -221,11 +269,51 @@ void saveCustomers(const vector<Customer> &customers) {
 
     cout << "Customers saved successfully to " << filename << "!\n" << endl;
     file.close();
+}*/
+
+void saveCustomers(const vector<Customer> &customers) {
+    string filename;
+    cout << "Enter the file path to save customers (e.g., customers.txt): ";
+    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear the input buffer
+    getline(cin, filename);
+
+    ofstream file(filename);
+    if (!file) {
+        cerr << "Error: Unable to open file for saving customers!\n" << endl;
+        return;
+    }
+
+    for (const auto &customer : customers) {
+        customer.saveToFile(file);
+    }
+
+    cout << "Customers saved successfully to " << filename << "!\n" << endl;
+    file.close();
 }
 
+/*void loadCustomers(vector<Customer> &customers) {
+    string filename;
+    cout << "Enter the file path to load customers (e.g., customers.txt): ";
+    getline(cin, filename);
+
+    ifstream file(filename);
+    if (!file) {
+        cerr << "Error: Unable to open file for loading customers!\n" << endl;
+        return;
+    }
+
+    string line;
+    while (getline(file, line)) {
+        customers.push_back(Customer::loadFromFile(line));
+    }
+
+    cout << "Customers loaded successfully from " << filename << "!\n" << endl;
+    file.close();
+}*/
 void loadCustomers(vector<Customer> &customers) {
     string filename;
     cout << "Enter the file path to load customers (e.g., customers.txt): ";
+    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear the input buffer
     getline(cin, filename);
 
     ifstream file(filename);
@@ -274,6 +362,7 @@ int main() {
         try {
             switch (choice) {
                 case 1: {
+                    // Add vehicle logic
                     string model, reg;
                     int typeChoice;
 
@@ -300,15 +389,61 @@ int main() {
                     }
                     break;
                 }
-                case 2:
-                    for (const auto &vehicle : vehicles) vehicle->display();
+
+                case 2: {
+                    // Display vehicles
+                    for (const auto &vehicle : vehicles) {
+                        vehicle->display();
+                    }
                     break;
-                case 3:
-                    // Save vehicle logic here
+                }
+
+                case 3: {
+                    // Save vehicles to file
+                    saveVehiclesToFile(vehicles);
                     break;
-                // Continue handling other menu cases
-                default:
+                }
+
+                case 4: {
+                    // Load vehicles from file
+                    loadVehiclesFromFile(vehicles);
+                    break;
+                }
+
+                case 5: {
+                    // Add customer logic
+                    addCustomer(customers);
+                    break;
+                }
+
+                case 6: {
+                    // Display customers
+                    displayCustomers(customers);
+                    break;
+                }
+
+                case 7: {
+                    // Save customers to file
+                    saveCustomers(customers);
+                    break;
+                }
+
+                case 8: {
+                    // Load customers from file
+                    loadCustomers(customers);
+                    break;
+                }
+
+                case 9: {
+                    // Exit
+                    cout << "Exiting program." << endl;
+                    break;
+                }
+
+                default: {
                     cout << "Invalid choice." << endl;
+                    break;
+                }
             }
         } catch (exception &e) {
             cerr << "Error: " << e.what() << endl;
@@ -317,4 +452,3 @@ int main() {
 
     return 0;
 }
-

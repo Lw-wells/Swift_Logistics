@@ -1,0 +1,2 @@
+Car,Mercedes,KDC243D,5
+Truck,ISUZU,KZR432S,30
