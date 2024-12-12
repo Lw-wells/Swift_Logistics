@@ -1,1 +1,2 @@
 # Logistics-App
+This project is a **Transport Logistics Management System** built in C++. It allows users to manage vehicles (cars and trucks) and customer records through a menu-driven interface. Key features include adding, displaying, saving, and loading data for vehicles and customers, with file persistence for data retention. The system leverages object-oriented principles, supports error handling, and provides a simple yet functional command-line interface for fleet and customer management.
