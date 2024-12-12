@@ -211,7 +211,7 @@ void saveCustomers(const vector<Customer> &customers) {
     cout << "Enter the file path to save customers (e.g., customers.txt): ";
     getline(cin, filename);
 
-    ofstream file(filename);
+    offstream file(filename);
     if (!file) {
         cerr << "Error: Unable to open file for saving customers!\n" << endl;
         return;
