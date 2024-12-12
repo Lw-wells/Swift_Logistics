@@ -3,11 +3,8 @@
 #include <vector>
 #include <string>
 #include <exception>
-<<<<<<< HEAD
 #include <limits> // Add this line
-=======
-#include <limits> 
->>>>>>> a85cb452fa121341b17a1a56352bf27b7873f467
+
 
 using namespace std;
 
@@ -337,15 +334,19 @@ void loadCustomers(vector<Customer> &customers) {
 
 // === Frontend Menu ===
 void showMenu() {
-    cout << "=== Transport Logistics System ===" << endl;
-    cout << "1. Add Vehicle" << endl;
-    cout << "2. Display Vehicles" << endl;
-    cout << "3. Save Vehicles to File" << endl;
-    cout << "4. Load Vehicles from File" << endl;
-    cout << "5. Add Customer" << endl;
-    cout << "6. Display Customers" << endl;
-    cout << "7. Save Customers to File" << endl;
-    cout << "8. Load Customers from File" << endl;
+    cout << "\t\t\t\t==================== SWIFT LOGISTICS ===================\n" << endl;
+    cout << "\t\t======================= Welcome to the Transport Logistics System! =======================\n" << endl;
+
+
+    cout << "\t\t\t============= Manage your fleet and customers with ease. ================\n" << endl;
+    cout << "1. Add Vehicle\n" << endl;
+    cout << "2. Display Vehicles\n" << endl;
+    cout << "3. Save Vehicles to File\n" << endl;
+    cout << "4. Load Vehicles from File\n" << endl;
+    cout << "5. Add Customer\n" << endl;
+    cout << "6. Display Customers\n" << endl;
+    cout << "7. Save Customers to File\n" << endl;
+    cout << "8. Load Customers from File\n" << endl;
     cout << "9. Exit" << endl;
     cout << "Enter your choice: ";
 }
